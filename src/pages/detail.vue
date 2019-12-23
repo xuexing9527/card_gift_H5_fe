@@ -2,39 +2,50 @@
   <div class="content-box">
     <common-header :tittle="tittle"></common-header>
     <div class="page-content">
-      <h1>{{data}}</h1>
-      <h1>{{newdata}}</h1>
+      <div v-if="code==0">
+        <mt-field label="收获人姓名" placeholder="请输入您的收获人姓名" v-model="name"></mt-field>
+        <mt-field label="手机号码" placeholder="请输入您的手机号码" v-model="phone"></mt-field>
+        <mt-field label="收获地址" placeholder="请输入您的收获地址" v-model="address"></mt-field>
+        <mt-button type="danger" style="width: 60%;margin-top: 30px;" @click="editdetail">提交</mt-button>
+      </div>
+      <mt-index-list style="text-align: left;" v-if="code==1">
+        <mt-cell title="收货人姓名">{{detail.consignee}}</mt-cell>
+        <mt-cell title="手机号码">{{detail.phone_number}}</mt-cell>
+        <mt-cell title="收货地址">{{detail.address}}</mt-cell>
+        <mt-cell title="发货状态">{{detail.ship_status}}</mt-cell>
+        <mt-cell title="运单号">{{detail.tracking_number}}</mt-cell>
+      </mt-index-list>
     </div>
   </div>
 </template>
 
 <script>
 import commonHeader from 'common/common-header'
-import { detail } from '../api/home-api'
+import { detail, editDetail } from '../api/home-api'
 
 export default {
   data() {
     return {
       tittle: '详情',
-      data: 0
+      data: 0,
+      detail: {},
+      code: 0,
+      name: '',
+      phone: '',
+      address: ''
     }
   },
   components: {
     commonHeader
   },
-  computed: {
-    newdata: function() {
-      return this.data + 1
-    }
-  },
   beforeCreate() {
+    const vm = this
     detail().then((res) => {
-      console.log(res)
       const { data } = res
       const { code, msg } = data
       if (code === 0) {
-        const { token } = msg
-        localStorage.setItem('token', token)
+        vm.detail = msg
+        vm.code = msg.ship_status
       } else {
         alert(msg)
       }
@@ -42,11 +53,18 @@ export default {
     })
   },
   methods: {
-    tohome() {
-      this.$router.goBack()
-    },
-    add() {
-      this.data++
+    editdetail() {
+      const vm = this
+      editDetail().then((res) => {
+        const { data } = res
+        const { code, msg } = data
+        if (code === 0) {
+          vm.code = msg.ship_status
+        } else {
+          alert(msg)
+        }
+      }).catch(() => {
+      })
     }
   }
 }

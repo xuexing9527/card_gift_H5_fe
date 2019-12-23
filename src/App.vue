@@ -63,4 +63,8 @@ export default {
  -webkit-transform: translate3d(-90%, 0, 0);
  -moz-transform: translate3d(-90%, 0, 0);
 }
+  input {
+    padding-left: 5px;
+    border-radius: 5px !important;
+  }
 </style>

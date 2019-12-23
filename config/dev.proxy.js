@@ -1,6 +1,6 @@
 module.exports = {
   '/users/': {
-    target: 'http://localhost:6698/',
+    target: 'http://gift.cbuyok.com',
     changeOrigin: true,
     // pathRewrite: {
     //   '^/root/': ''

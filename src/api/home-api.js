@@ -11,7 +11,7 @@ export function login(params) {
   return POST(`${baseUrl}users/login`, params)
 }
 
-// 登录接口
+// 查看详情接口
 export function detail() {
   return axios({
     url: `${baseUrl}users/detail`,
@@ -20,4 +20,9 @@ export function detail() {
       token: localStorage.getItem('token')
     }
   })
+}
+
+// 编辑详情接口
+export function editDetail(params) {
+  return POST(`${baseUrl}users/edit/detail`, params)
 }
