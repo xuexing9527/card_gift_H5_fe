@@ -3,8 +3,8 @@
     <common-header :tittle="tittle"></common-header>
     <div class="page-content">
       <div v-if="code==0">
-        <mt-field label="收获人姓名" placeholder="请输入您的收获人姓名" v-model="name"></mt-field>
-        <mt-field label="手机号码" placeholder="请输入您的手机号码" v-model="phone"></mt-field>
+        <mt-field label="收获人姓名" placeholder="请输入您的收获人姓名" v-model="consignee"></mt-field>
+        <mt-field label="手机号码" placeholder="请输入您的手机号码" v-model="phone_number"></mt-field>
         <mt-field label="收获地址" placeholder="请输入您的收获地址" v-model="address"></mt-field>
         <mt-button type="danger" style="width: 60%;margin-top: 30px;" @click="editdetail">提交</mt-button>
       </div>
@@ -21,7 +21,7 @@
 
 <script>
 import commonHeader from 'common/common-header'
-import { detail, editDetail } from '../api/home-api'
+import { detail, add } from '../api/home-api'
 
 export default {
   data() {
@@ -30,8 +30,8 @@ export default {
       data: 0,
       detail: {},
       code: 0,
-      name: '',
-      phone: '',
+      consignee: '',
+      phone_number: '',
       address: ''
     }
   },
@@ -55,7 +55,11 @@ export default {
   methods: {
     editdetail() {
       const vm = this
-      editDetail().then((res) => {
+      add({
+        consignee: vm.consignee,
+        phone_number: vm.phone_number,
+        address: vm.address
+      }).then((res) => {
         const { data } = res
         const { code, msg } = data
         if (code === 0) {

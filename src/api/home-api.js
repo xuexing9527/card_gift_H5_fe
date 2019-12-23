@@ -23,6 +23,6 @@ export function detail() {
 }
 
 // 编辑详情接口
-export function editDetail(params) {
-  return POST(`${baseUrl}users/edit/detail`, params)
+export function add(params) {
+  return POST(`${baseUrl}users/add`, params)
 }
