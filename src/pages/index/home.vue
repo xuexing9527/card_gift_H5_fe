@@ -13,10 +13,9 @@
 </template>
 
 <script>
-import {mapMutations, mapGetters, mapState} from 'vuex'
+import { mapMutations, mapGetters, mapState } from 'vuex'
 import commonHeader from 'common/common-header'
 import * as homeApi from 'api/home-api'
-import { ERR_OK } from 'config/index'
 export default {
   data () {
     return {
@@ -35,6 +34,7 @@ export default {
       this.$router.togo('/Home/Detail')
     },
     login() {
+      const vm = this
       let params = {
         card_code: this.cardNo,
         card_pwd: this.cardPw,
@@ -42,11 +42,15 @@ export default {
       }
       homeApi.login(params).then((res) => {
         console.log(res)
-        // let {data} = res
-        // if (data.success === ERR_OK) {
-        //   alert(data.value.token)
-        // } else {
-        // }
+        const { data } = res
+        const { code, msg } = data
+        if (code === 0) {
+          const { token } = msg
+          localStorage.setItem('token', token)
+          vm.$router.push('/home/detail')
+        } else {
+          alert(msg)
+        }
       }).catch(() => {
       })
     }

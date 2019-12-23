@@ -10,6 +10,8 @@
 
 <script>
 import commonHeader from 'common/common-header'
+import { detail } from '../api/home-api'
+
 export default {
   data() {
     return {
@@ -24,6 +26,20 @@ export default {
     newdata: function() {
       return this.data + 1
     }
+  },
+  beforeCreate() {
+    detail().then((res) => {
+      console.log(res)
+      const { data } = res
+      const { code, msg } = data
+      if (code === 0) {
+        const { token } = msg
+        localStorage.setItem('token', token)
+      } else {
+        alert(msg)
+      }
+    }).catch(() => {
+    })
   },
   methods: {
     tohome() {

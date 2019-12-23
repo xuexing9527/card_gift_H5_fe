@@ -48,8 +48,6 @@ export function POST(requestUrl, params = '') {
   return axios({
     url: requestUrl,
     method: 'post',
-    data: {
-      'body': params
-    }
+    data: params,
   })
 }
