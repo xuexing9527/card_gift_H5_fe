@@ -1,9 +1,9 @@
 module.exports = {
-  '/root/': {
+  '/users/': {
     target: 'http://localhost:6698/',
     changeOrigin: true,
-    pathRewrite: {
-      '^/root/': ''
-    }
+    // pathRewrite: {
+    //   '^/root/': ''
+    // }
   }
 }
