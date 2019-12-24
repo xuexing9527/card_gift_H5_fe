@@ -3,7 +3,7 @@
     <common-header :tittle="tittle"></common-header>
     <div class="page-content">
       <p style="font-size: 16px;margin: 10px 0; color: white;opacity: .5">
-        因需现杀，下单后一周左右发货，请耐心等待！
+        因需现杀，下单48小时后发货，请耐心等待
       </p>
       <!--未填写订单地址显示界面-->
       <div v-if="isEdit">
@@ -32,7 +32,7 @@
           <p style="font-size: 16px;margin: 10px 0; color: #9f9f9f;opacity: .9;text-align: center">
             更多农产品信息请关注乐享农场公众号
           </p>
-          <img src="../assets/imgs/wx.png" alt="企业公众号">
+          <img src="../assets/imgs/wx.jpg" alt="企业公众号">
         </div>
       </mt-index-list>
     </div>
