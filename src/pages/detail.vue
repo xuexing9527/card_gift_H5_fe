@@ -24,7 +24,7 @@
           <div style="float: left">
             <mt-cell title="收货地址"></mt-cell>
           </div>
-          <div style="float: right">
+          <div style="overflow-y: auto; height: 1rem;">
             <mt-cell title="">{{detail.address}}</mt-cell>
           </div>
         </div>
