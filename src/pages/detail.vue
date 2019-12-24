@@ -3,7 +3,7 @@
     <common-header :tittle="tittle"></common-header>
     <div class="page-content">
       <p style="font-size: 16px;margin: 10px 0; color: white;opacity: .5">
-        发货时间为下单后的48小时以内
+        因需现杀，下单后一周左右发货，请耐心等待！
       </p>
       <!--未填写订单地址显示界面-->
       <div v-if="isEdit">
@@ -66,7 +66,7 @@ export default {
       const { code, msg } = data
       if (code === 0) {
         vm.detail = msg
-        vm.isEdit = msg.ship_status === 0 ? true : false
+        vm.isEdit = msg.ship_status === 0
       } else {
         Toast({
           message: msg,
