@@ -43,12 +43,10 @@ export default {
         const { data } = res
         const { code, msg } = data
         if (code === 0) {
-          alert('成功')
           const { token } = msg
           localStorage.setItem('token', token)
           vm.$router.push('/home/detail')
         } else {
-          alert('error')
           Toast({
             message: msg,
             position: 'middle',
