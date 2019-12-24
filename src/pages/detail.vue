@@ -88,7 +88,21 @@ export default {
         const { data } = res
         const { code, msg } = data
         if (code === 0) {
-          vm.isEdit = false
+          detail().then((res) => {
+            const { data } = res
+            const { code, msg } = data
+            if (code === 0) {
+              vm.detail = msg
+              vm.isEdit = false
+            } else {
+              Toast({
+                message: msg,
+                position: 'middle',
+                duration: 2000
+              })
+            }
+          }).catch(() => {
+          })
         } else {
           Toast({
             message: msg,
