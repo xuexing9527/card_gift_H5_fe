@@ -3,7 +3,7 @@
     <common-header :tittle="tittle"></common-header>
     <div class="page-content">
       <p style="font-size: 16px;margin: 10px 0; color: white;opacity: .5">
-        因需现杀，下单48小时后发货，请耐心等待
+        下单48小时后发货，请耐心等待
       </p>
       <!--未填写订单地址显示界面-->
       <div v-if="isEdit">
