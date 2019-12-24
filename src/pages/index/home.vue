@@ -40,16 +40,15 @@ export default {
         company_code: this.port
       }
       homeApi.login(params).then((res) => {
-        console.log(res)
         const { data } = res
         const { code, msg } = data
         if (code === 0) {
+          alert('成功')
           const { token } = msg
-          console.log(token)
           localStorage.setItem('token', token)
-          console.log(localStorage)
           vm.$router.push('/home/detail')
         } else {
+          alert('error')
           Toast({
             message: msg,
             position: 'middle',
