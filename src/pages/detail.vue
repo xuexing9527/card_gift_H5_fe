@@ -29,10 +29,10 @@
           </div>
         </div>
         <div class="wx" v-if="!isEdit">
-          <img src="../assets/imgs/wx.png" alt="企业公众号">
-          <p style="font-size: 16px;margin: 10px 0; color: black;opacity: .9;text-align: center">
+          <p style="font-size: 16px;margin: 10px 0; color: #9f9f9f;opacity: .9;text-align: center">
             更多农产品信息请关注乐享农场公众号
           </p>
+          <img src="../assets/imgs/wx.png" alt="企业公众号">
         </div>
       </mt-index-list>
     </div>
