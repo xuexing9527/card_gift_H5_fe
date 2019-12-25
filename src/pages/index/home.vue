@@ -3,7 +3,7 @@
     <!--<common-header :showinput="false" :showback="false"></common-header>-->
     <div class="page-content">
       <div class="login-content">
-        <h2 style="font-size: 0.5rem; color: #fff; margin-bottom: 15px;">年货有机最有范，欢迎选择乐享农场！</h2>
+        <h2 style="font-size: 0.5rem; color: #fff; margin-bottom: 15px;"><img src="../../assets/logo.png" style="width: 2rem;">北京中农乐享科技有限公司</h2>
         <mt-field label="卡 号" placeholder="请输入您的卡号" v-model="cardNo"></mt-field>
         <mt-field label="密 码" type="password" placeholder="请输入您的密码" v-model="cardPw"></mt-field>
         <mt-field label="企业码" placeholder="请输入您的企业码" v-model="port"></mt-field>
