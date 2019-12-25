@@ -19,7 +19,7 @@
         </p>
       </div>
       <!--已填写订单地址显示界面-->
-      <mt-index-list style="text-align: left;" v-if="!isEdit">
+      <mt-index-list style="text-align: left;" v-if="isQuery">
         <mt-cell title="发货商品">五斤精品牛肉+一只散养土鸡</mt-cell>
         <mt-cell title="发货状态" v-if="detail.ship_status==1">待发货</mt-cell>
         <mt-cell title="发货状态" v-if="detail.ship_status==2">已发货</mt-cell>
@@ -65,6 +65,7 @@ export default {
       tittle: '订单详情',
       data: 0,
       isEdit: false,
+      isQuery: false,
       detail: {},
       consignee: '',
       phone_number: '',
@@ -76,14 +77,15 @@ export default {
   components: {
     commonHeader
   },
-  beforeCreate() {
+  beforeCreate () {
     const vm = this
     detail().then((res) => {
       const { data } = res
       const { code, msg } = data
       if (code === 0) {
         vm.detail = msg
-        vm.isEdit = msg.ship_status === 0
+        vm.isEdit = !msg.ship_status
+        vm.isQuery = [1, 2].includes(msg.ship_status)
       } else {
         Toast({
           message: msg,
@@ -140,7 +142,8 @@ export default {
             const { code, msg } = data
             if (code === 0) {
               vm.detail = msg
-              vm.isEdit = false
+              vm.isEdit = !msg.ship_status
+              vm.isQuery = [1, 2].includes(msg.ship_status)
             } else {
               Toast({
                 message: msg,
@@ -149,7 +152,11 @@ export default {
               })
             }
           }).catch((err) => {
-            alert(err)
+            Toast({
+              message: err,
+              position: 'middle',
+              duration: 2000
+            })
           })
         } else {
           Toast({
