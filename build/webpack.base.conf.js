@@ -24,12 +24,12 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
-  externals:{         // 使用CDN数据
-    'vue': 'Vue',
-    'vue-router': 'VueRouter',
-    'vuex':'Vuex',
-    'mint-ui': 'MINT'
-  },
+  // externals:{         // 使用CDN数据
+  //   'vue': 'Vue',
+  //   'vue-router': 'VueRouter',
+  //   'vuex':'Vuex',
+  //   'mint-ui': 'MINT'
+  // },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
