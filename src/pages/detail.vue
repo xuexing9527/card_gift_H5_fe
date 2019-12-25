@@ -9,8 +9,9 @@
       <div v-if="isEdit">
         <mt-field label="收货人姓名" placeholder="请输入您的收货人姓名" v-model="consignee"></mt-field>
         <mt-field label="手机号码" type="tel" placeholder="请输入您的手机号码" v-model="phone_number"></mt-field>
-        <mt-field label="收货地址" type="textarea" rows="3" placeholder="请输入您的收货地址" v-model="address"></mt-field>
-        <mt-button type="danger" style="width: 60%;margin-top: 30px;" @click="editdetail">提交</mt-button>
+        <mt-field label="收货地址" type="textarea" rows="2" placeholder="请输入您的收货地址" v-model="address"></mt-field>
+        <mt-field label="填写留言" type="textarea" rows="2" placeholder="如有留言请在这里填写" v-model="note"></mt-field>
+        <mt-button type="danger" style="width: 60%;margin-top: 30px;" @click="editdetail">确认兑换</mt-button>
       </div>
       <!--已填写订单地址显示界面-->
       <mt-index-list style="text-align: left;" v-if="!isEdit">
@@ -26,6 +27,14 @@
           </div>
           <div style="overflow-y: auto; height: 1rem;">
             <mt-cell title="">{{detail.address}}</mt-cell>
+          </div>
+        </div>
+        <div style="overflow: hidden;background-color: #fff">
+          <div style="float: left">
+            <mt-cell title="留言信息"></mt-cell>
+          </div>
+          <div style="overflow-y: auto; height: 1rem;">
+            <mt-cell title="">{{detail.note}}</mt-cell>
           </div>
         </div>
         <div class="wx" v-if="!isEdit">
@@ -53,7 +62,8 @@ export default {
       detail: {},
       consignee: '',
       phone_number: '',
-      address: ''
+      address: '',
+      note: ''
     }
   },
   components: {
@@ -80,11 +90,41 @@ export default {
   methods: {
     editdetail() {
       const vm = this
-      add({
+      let params = {
         consignee: vm.consignee,
         phone_number: vm.phone_number,
-        address: vm.address
-      }).then((res) => {
+        address: vm.address,
+        note: vm.note
+      }
+      let alertMsg = ''
+      if (params.consignee === '') {
+        alertMsg = '收货人姓名不能为空'
+        Toast({
+          message: alertMsg,
+          position: 'middle',
+          duration: 2000
+        })
+        return
+      }
+      if (params.phone_number === '') {
+        alertMsg = '收货人电话号码不能为空'
+        Toast({
+          message: alertMsg,
+          position: 'middle',
+          duration: 2000
+        })
+        return
+      }
+      if (params.address === '') {
+        alertMsg = '收货地址不能为空'
+        Toast({
+          message: alertMsg,
+          position: 'middle',
+          duration: 2000
+        })
+        return
+      }
+      add(params).then((res) => {
         const { data } = res
         const { code, msg } = data
         if (code === 0) {
@@ -101,7 +141,8 @@ export default {
                 duration: 2000
               })
             }
-          }).catch(() => {
+          }).catch((err) => {
+            alert(err)
           })
         } else {
           Toast({
