@@ -24,6 +24,7 @@
         <mt-cell title="发货状态" v-if="detail.ship_status==1">待发货</mt-cell>
         <mt-cell title="发货状态" v-if="detail.ship_status==2">已发货</mt-cell>
         <mt-cell v-if="detail.ship_status==2" title="运单号">{{detail.tracking_number}}</mt-cell>
+        <mt-cell title="下单时间">{{detail.add_time}}</mt-cell>
         <mt-cell title="收货人姓名">{{detail.consignee}}</mt-cell>
         <mt-cell title="手机号码">{{detail.phone_number}}</mt-cell>
         <div style="overflow: hidden;background-color: #fff">
