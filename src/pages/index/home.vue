@@ -3,7 +3,8 @@
     <!--<common-header :showinput="false" :showback="false"></common-header>-->
     <div class="page-content">
       <div class="login-content">
-        <h2 style="font-size: 0.5rem; color: #fff;opacity: .8; margin-bottom: 15px;"><img src="../../assets/logo.png" style="width: 1rem;">北京中农乐享科技有限公司</h2>
+        <h2 style="display: flex; justify-content: center; align-items: center ;font-size: 0.5rem; color: #fff;opacity: .8; margin-bottom: 15px;">
+          <img src="../../assets/logo.png" style="width: 1rem; margin-right: 5px;">北京中农乐享科技有限公司</h2>
         <mt-field label="卡 号" placeholder="请输入您的卡号" v-model="cardNo"></mt-field>
         <mt-field label="密 码" type="password" placeholder="请输入您的密码" v-model="cardPw"></mt-field>
         <mt-field label="企业码" type="password"  placeholder="请输入您的企业码" v-model="port"></mt-field>
