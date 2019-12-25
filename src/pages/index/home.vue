@@ -6,7 +6,7 @@
         <h2 style="font-size: 0.5rem; color: #fff; margin-bottom: 15px;"><img src="../../assets/logo.png" style="width: 2rem;">北京中农乐享科技有限公司</h2>
         <mt-field label="卡 号" placeholder="请输入您的卡号" v-model="cardNo"></mt-field>
         <mt-field label="密 码" type="password" placeholder="请输入您的密码" v-model="cardPw"></mt-field>
-        <mt-field label="企业码" placeholder="请输入您的企业码" v-model="port"></mt-field>
+        <mt-field label="企业码" type="password"  placeholder="请输入您的企业码" v-model="port"></mt-field>
         <mt-button type="danger" style="width: 60%;margin-top: 30px;" @click="login">登录</mt-button>
       </div>
     </div>
@@ -39,6 +39,34 @@ export default {
         card_pwd: this.cardPw,
         company_code: this.port
       }
+      let alertMsg = ''
+      if (params.card_code === '') {
+        alertMsg = '卡号不能为空'
+        Toast({
+          message: alertMsg,
+          position: 'middle',
+          duration: 2000
+        })
+        return
+      }
+      if (params.card_pwd === '') {
+        alertMsg = '密码不能为空'
+        Toast({
+          message: alertMsg,
+          position: 'middle',
+          duration: 2000
+        })
+        return
+      }
+      if (params.company_code === '') {
+        alertMsg = '企业码不能为空'
+        Toast({
+          message: alertMsg,
+          position: 'middle',
+          duration: 2000
+        })
+        return
+      }
       homeApi.login(params).then((res) => {
         const { data } = res
         const { code, msg } = data
@@ -53,7 +81,8 @@ export default {
             duration: 2000
           })
         }
-      }).catch(() => {
+      }).catch((err) => {
+        alert(err)
       })
     }
   },
