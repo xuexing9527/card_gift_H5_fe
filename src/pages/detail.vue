@@ -43,12 +43,12 @@
             <mt-cell title="">{{detail.note}}</mt-cell>
           </div>
         </div>
-        <div class="wx" v-if="!isEdit">
-          <p style="font-size: 16px;margin: 10px 0; color: #9f9f9f;opacity: .9;text-align: center">
-            更多有机农产品信息请关注乐享农场公众号
-          </p>
-          <img src="../assets/imgs/wx.jpg" alt="企业公众号">
-        </div>
+<!--        <div class="wx" v-if="!isEdit">-->
+<!--          <p style="font-size: 16px;margin: 10px 0; color: #9f9f9f;opacity: .9;text-align: center">-->
+<!--            更多有机农产品信息请关注乐享农场公众号-->
+<!--          </p>-->
+<!--          <img src="../assets/imgs/wx.jpg" alt="企业公众号">-->
+<!--        </div>-->
       </mt-index-list>
     </div>
   </div>
@@ -137,6 +137,11 @@ export default {
         const { data } = res
         const { code, msg } = data
         if (code === 0) {
+          Toast({
+            message: '激活成功, 正在为您跳转详情页面...',
+            position: 'middle',
+            duration: 2000
+          })
           detail().then((res) => {
             const { data } = res
             const { code, msg } = data
