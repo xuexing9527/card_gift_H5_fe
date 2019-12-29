@@ -79,6 +79,10 @@ export default {
   },
   beforeCreate () {
     const vm = this
+    let T = Toast({
+      message: '正在加载，请稍后...',
+      iconClass: 'icon icon-success'
+    })
     detail().then((res) => {
       const { data } = res
       const { code, msg } = data
@@ -93,6 +97,9 @@ export default {
           duration: 2000
         })
       }
+      setTimeout(() => {
+        T.close()
+      }, 500)
     }).catch(() => {
     })
   },
@@ -133,36 +140,44 @@ export default {
         })
         return
       }
+      let T = Toast({
+        message: '正在激活，请稍后...',
+        iconClass: 'icon icon-success'
+      })
       add(params).then((res) => {
         const { data } = res
         const { code, msg } = data
+        T.close()
         if (code === 0) {
-          Toast({
+          let T2 = Toast({
             message: '激活成功, 正在为您跳转详情页面...',
             position: 'middle',
-            duration: 2000
+            duration: 1500
           })
-          detail().then((res) => {
-            const { data } = res
-            const { code, msg } = data
-            if (code === 0) {
-              vm.detail = msg
-              vm.isEdit = !msg.ship_status
-              vm.isQuery = [1, 2].includes(msg.ship_status)
-            } else {
+          setTimeout(() => {
+            detail().then((res) => {
+              T2.close()
+              const { data } = res
+              const { code, msg } = data
+              if (code === 0) {
+                vm.detail = msg
+                vm.isEdit = !msg.ship_status
+                vm.isQuery = [1, 2].includes(msg.ship_status)
+              } else {
+                Toast({
+                  message: msg,
+                  position: 'middle',
+                  duration: 2000
+                })
+              }
+            }).catch((err) => {
               Toast({
-                message: msg,
+                message: err,
                 position: 'middle',
                 duration: 2000
               })
-            }
-          }).catch((err) => {
-            Toast({
-              message: err,
-              position: 'middle',
-              duration: 2000
             })
-          })
+          }, 1200)
         } else {
           Toast({
             message: msg,

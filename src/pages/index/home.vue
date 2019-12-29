@@ -68,13 +68,27 @@ export default {
         })
         return
       }
+      let loginLoadingMsg = Toast({
+        message: '登录中...',
+        position: 'middle'
+      })
       homeApi.login(params).then((res) => {
+        setTimeout(() => {
+          loginLoadingMsg.close()
+        })
         const { data } = res
         const { code, msg } = data
         if (code === 0) {
-          const { token } = msg
-          localStorage.setItem('token', token)
-          vm.$router.push('/home/detail')
+          Toast({
+            message: '登录成功, 正在为您跳转...',
+            iconClass: 'icon icon-success',
+            duration: 1200
+          })
+          setTimeout(() => {
+            const { token } = msg
+            localStorage.setItem('token', token)
+            vm.$router.push('/home/detail')
+          }, 1200)
         } else {
           Toast({
             message: msg,
